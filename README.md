@@ -21,6 +21,7 @@
   * [Mathematical Mastery Calculation](#-mathematical-mastery-calculation)
   * [Tech Stack & Tooling](#-tech-stack--tooling)
   * [Installation & Local Setup](#-installation--local-setup)
+  * [Automated Testing Suite](#-automated-testing-suite)
 
 ---
 
@@ -186,6 +187,36 @@ GROQ_API_KEY=gsk_your_actual_key_here
 npm start
 ```
 Your server will start on **`http://localhost:3000`**. Open that link in your browser to start learning locally!
+
+---
+
+### 🧪 Automated Testing Suite
+
+Mentora includes an end-to-end automated testing suite that validates API contracts, curriculum generation, mastery scoring, and transcription handling:
+
+```bash
+# Run the complete test suite against local server
+node test_complete_suite.js
+
+# Or test against your custom deployment URL
+TEST_URL=https://mentora-voice-tutor.vercel.app node test_complete_suite.js
+```
+
+#### Test Suite Output
+```text
+======================================================
+🚀 RUNNING EXTENSIVE TEST SUITE AGAINST: http://localhost:3000
+======================================================
+
+⏳ [TEST] POST /api/session/start - Create Session with Roadmap ... ✅ PASSED (1319ms)
+⏳ [TEST] POST /api/session/turn - Accurate Student Response     ... ✅ PASSED (549ms)
+⏳ [TEST] POST /api/session/turn - Sub-optimal Answer & Gap Fix  ... ✅ PASSED (567ms)
+⏳ [TEST] POST /api/session/transcribe - Audio STT Validation    ... ✅ PASSED (62ms)
+
+======================================================
+📊 TEST SUITE SUMMARY: 4 PASSED, 0 FAILED
+======================================================
+```
 
 ---
 

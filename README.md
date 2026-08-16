@@ -18,9 +18,6 @@
 * [For Developers & Tech Teams](#-for-developers--tech-teams)
   * [Core Technical Features](#-core-technical-features)
   * [Installation & Local Setup](#-installation--local-setup)
-  * [Running the Automated Tests](#-running-the-automated-tests)
-  * [Production Deployment (Vercel)](#-production-deployment-vercel)
-  * [API Reference](#-api-reference)
 
 ---
 
@@ -114,83 +111,6 @@ GROQ_API_KEY=gsk_your_actual_key_here
 npm start
 ```
 Your server will start on **`http://localhost:3000`**. Open that link in your browser to start learning locally!
-
----
-
-### 🧪 Running the Automated Tests
-Mentora includes a full integration testing suite that validates API contracts, curriculum generation, and transcription:
-
-```bash
-# Run tests locally against the active port 3000 server
-node test_complete_suite.js
-
-# Run tests against a deployed staging/production environment
-TEST_URL=https://your-app.vercel.app node test_complete_suite.js
-```
-
----
-
-### 🚀 Production Deployment (Vercel)
-Mentora is pre-configured to run as serverless API routes on Vercel:
-
-```bash
-# Deploy to production using Vercel CLI
-npx vercel --prod
-```
-
-Make sure to set the environment variables in your Vercel Dashboard:
-* `GROQ_API_KEY` = `your_groq_api_key_here`
-* `LLM_PROVIDER` = `groq`
-
----
-
-### 📡 API Reference
-
-#### 1. `POST /api/session/start`
-Initializes a session and generates the custom curriculum node graph.
-* **Request**: `{ "goal": "Quantum Mechanics" }`
-* **Response**:
-  ```json
-  {
-    "session_id": "session_1786801123456",
-    "topic": "Quantum Mechanics",
-    "phase": "LEARNING",
-    "reply_text": "Welcome to Quantum Mechanics. Can you explain what a wave function represents?",
-    "active_concept_id": "wave-function",
-    "learning_path": [
-      { "id": "wave-function", "name": "Wave Function & Probability", "description": "Defining system states" }
-    ],
-    "mastery_map": {
-      "wave-function": { "status": "IN_PROGRESS", "score": 35 }
-    },
-    "understanding_pct": 12
-  }
-  ```
-
-#### 2. `POST /api/session/turn`
-Evaluates student response and adjusts graph nodes/mastery values.
-* **Request**:
-  ```json
-  {
-    "session_id": "session_1786801123456",
-    "transcript": "It represents the probability amplitude of finding a particle at a specific position.",
-    "session_state": { "..." : "..." }
-  }
-  ```
-* **Response**:
-  ```json
-  {
-    "session_id": "session_1786801123456",
-    "tutor_state": "CONFIRMED",
-    "action": "ADVANCE",
-    "reply_text": "Perfect answer! Now, what is the significance of normalizing the wave function?",
-    "active_concept_id": "normalization",
-    "mastery_updates": [
-      { "concept_id": "wave-function", "status": "MASTERED", "score": 100 }
-    ],
-    "understanding_pct": 33
-  }
-  ```
 
 ---
 

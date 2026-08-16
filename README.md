@@ -123,8 +123,6 @@ Mentora computes your overall understanding percentage dynamically using a norma
 
 $$\text{Mastery Score } (%) = \left( \frac{\sum_{i=1}^{N} w_i}{N} \right) \times 100$$
 
-*(In plain English: Your overall mastery score is the average of all these weights across your entire roadmap, converted to a percentage. You only reach 100% mastery when every single concept on your roadmap has been fully **Mastered**!)*
-
 Where $N$ is the total count of curriculum nodes, and $w_i$ represents the discrete state weight of concept $i$:
 
 | Concept Status | State Weight ($w_i$) | Pedagogical Meaning |
@@ -133,6 +131,8 @@ Where $N$ is the total count of curriculum nodes, and $w_i$ represents the discr
 | `IN_PROGRESS` | `0.35` | Concept currently under active evaluation |
 | `GAP_DETECTED` | `0.15` | Active misconception being Socraticly remediated |
 | `MASTERED` | `1.00` | Verified comprehension and successful explanation |
+
+*(In plain English: Your overall mastery score is the average of all these weights across your entire roadmap, converted to a percentage. You only reach 100% mastery when every single concept on your roadmap has been fully **Mastered**!)*
 
 ---
 

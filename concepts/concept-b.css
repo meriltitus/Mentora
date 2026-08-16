@@ -1,0 +1,258 @@
+/* Concept B — Minimal AI Core CSS */
+
+#concept-b-workspace {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-body);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#concept-b-workspace.active {
+  display: flex;
+}
+
+.minimal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #0c0c0e 0%, #000000 100%);
+  z-index: 1;
+}
+
+.minimal-container {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 2rem;
+  z-index: 10;
+  position: relative;
+}
+
+/* Fluid Liquid Orb Container */
+.minimal-orb-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.minimal-orb-container {
+  width: 100%;
+  height: 100%;
+  background: #000; /* Must be solid black for the contrast filter */
+  filter: contrast(28);
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minimal-orb-blur-bg {
+  position: absolute;
+  width: 130%;
+  height: 130%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+  animation: orbSoftBreath 8s ease-in-out infinite alternate;
+}
+
+/* Overlapping blob components styled with blur */
+.minimal-orb-fluid {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  background: #fff;
+  border-radius: 50%;
+  filter: blur(14px);
+  transition: var(--transition-smooth);
+}
+
+/* Sub-blobs that float around creating gooey effect */
+.minimal-orb-fluid::before,
+.minimal-orb-fluid::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  filter: blur(2px); /* Blurred together by parent */
+  transition: var(--transition-smooth);
+}
+
+.minimal-orb-fluid::before {
+  width: 60px;
+  height: 60px;
+  top: 10px;
+  left: -20px;
+  animation: minimalBlobMove1 6s infinite ease-in-out alternate;
+}
+
+.minimal-orb-fluid::after {
+  width: 75px;
+  height: 75px;
+  bottom: -15px;
+  right: -25px;
+  animation: minimalBlobMove2 5s infinite ease-in-out alternate;
+}
+
+/* Large dialogue typography */
+.minimal-content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 650px;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.minimal-state-label {
+  font-family: var(--font-header);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #636366;
+  opacity: 0.8;
+  transition: var(--transition-fast);
+}
+
+.minimal-ai-speech {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #e5e5ea;
+  transition: var(--transition-smooth);
+}
+
+.minimal-user-speech {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #8e8e93;
+  margin-top: 0.5rem;
+  transition: var(--transition-smooth);
+}
+
+/* Contextual Progress Strip */
+.minimal-progress-bar-container {
+  width: 100%;
+  max-width: 500px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  opacity: 0.15;
+  transition: var(--transition-smooth);
+}
+
+.minimal-progress-bar-container:hover {
+  opacity: 0.7;
+}
+
+.minimal-progress-bar-container.active {
+  opacity: 0.5;
+}
+
+.minimal-progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-header);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #8e8e93;
+  margin-bottom: 0.8rem;
+}
+
+.minimal-progress-dots {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.minimal-dot {
+  flex: 1;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.minimal-dot.status-mastered {
+  background-color: #ffffff;
+}
+
+.minimal-dot.status-retesting,
+.minimal-dot.status-partial-gap {
+  background-color: #f59e0b;
+  animation: minimalPulseOrange 1.5s infinite;
+}
+
+.minimal-dot.active {
+  background-color: #ffffff;
+  height: 3px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+.minimal-dot-tooltip {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1c1c1e;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-fast);
+}
+
+.minimal-dot:hover .minimal-dot-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Keyframe animations */
+@keyframes orbSoftBreath {
+  0% { transform: scale(0.95); opacity: 0.4; }
+  100% { transform: scale(1.1); opacity: 0.7; }
+}
+
+@keyframes minimalBlobMove1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(15px, 20px) scale(0.9); }
+  100% { transform: translate(-10px, -5px) scale(1.1); }
+}
+
+@keyframes minimalBlobMove2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, -15px) scale(1.15); }
+  100% { transform: translate(10px, 10px) scale(0.85); }
+}
+
+@keyframes minimalPulseOrange {
+  0% { box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+  50% { box-shadow: 0 0 6px rgba(245, 158, 11, 0.8); }
+  100% { box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+}

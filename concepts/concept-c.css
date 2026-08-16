@@ -1,0 +1,369 @@
+/* Concept C — Living Knowledge Space CSS */
+
+#concept-c-workspace {
+  background-color: #0b0d11;
+  color: #e2e8f0;
+  font-family: var(--font-body);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot matrix grid background */
+.space-ambient-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating State Badge */
+.space-state-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(17, 24, 39, 0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.space-state-text {
+  font-family: var(--font-header);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.space-state-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #a855f7;
+  animation: spaceGlowDot 1.5s infinite alternate;
+}
+
+/* Infinite Spatial Graph Canvas */
+.space-graph-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: grab;
+}
+
+.space-graph-container:active {
+  cursor: grabbing;
+}
+
+#space-svg-connections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 11;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.space-nodes-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Node cards (Glossy floating cards) */
+.space-node-card {
+  position: absolute;
+  background: rgba(22, 28, 45, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  min-width: 160px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: 
+    border-color 0.4s ease, 
+    box-shadow 0.4s ease, 
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.space-node-card:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.space-node-card.active {
+  background: rgba(26, 37, 65, 0.95);
+  border-color: #6366f1;
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
+  z-index: 100;
+}
+
+.space-node-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.space-node-title {
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.space-node-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #64748b;
+  flex-shrink: 0;
+}
+
+/* Status variants */
+.space-node-card.status-mastered {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.space-node-card.status-mastered .space-node-status-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.space-node-card.status-partial-gap {
+  border-color: rgba(245, 158, 11, 0.4);
+  animation: spaceGapBorderPulse 2s infinite alternate;
+}
+.space-node-card.status-partial-gap .space-node-status-dot {
+  background-color: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.space-node-card.status-retesting {
+  border-color: rgba(236, 72, 153, 0.4);
+}
+.space-node-card.status-retesting .space-node-status-dot {
+  background-color: #ec4899;
+  box-shadow: 0 0 8px #ec4899;
+}
+
+.space-node-card.status-not-tested {
+  opacity: 0.4;
+}
+
+/* SVG Connection Lines */
+.space-edge-line {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1.5;
+  stroke-dasharray: 4;
+  transition: var(--transition-smooth);
+}
+
+.space-edge-line.active {
+  stroke: rgba(99, 102, 241, 0.3);
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+.space-edge-line.mastered {
+  stroke: rgba(16, 185, 129, 0.25);
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+/* Focus Sidebar Panel (emerging contextually) */
+.space-focus-panel {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  width: 280px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 1.25rem;
+  z-index: 40;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateX(-320px);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.space-focus-panel.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.focus-panel-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.focus-pre {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: #6366f1;
+  letter-spacing: 0.08em;
+}
+
+.space-focus-title {
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.focus-panel-body p {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.space-mastery-gauge {
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.gauge-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: #475569;
+  margin-bottom: 0.4rem;
+}
+
+.gauge-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.gauge-status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #6366f1;
+  text-align: right;
+}
+
+/* Bottom Chatless Voice Dock */
+.space-voice-dock {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 750px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 0.8rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 45;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  transition: var(--transition-smooth);
+}
+
+/* Microphone pulse and voice animation */
+.space-voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 24px;
+  width: 60px;
+}
+
+.wave-bar {
+  flex: 1;
+  height: 3px;
+  background-color: #6366f1;
+  border-radius: 2px;
+  transition: height 0.15s ease;
+}
+
+.space-voice-text-area {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 36px;
+  justify-content: center;
+}
+
+.space-ai-line {
+  font-family: var(--font-header);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #f1f5f9;
+}
+
+.space-user-line {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.space-voice-indicator {
+  width: 38px;
+  height: 38px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #818cf8;
+  transition: var(--transition-fast);
+}
+
+.space-node-card.active-curriculum {
+  border-style: solid;
+}
+
+/* Animations */
+@keyframes spaceGlowDot {
+  0% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 rgba(168, 85, 247, 0); }
+  100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+}
+
+@keyframes spaceGapBorderPulse {
+  0% { border-color: rgba(245, 158, 11, 0.2); box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+  100% { border-color: rgba(245, 158, 11, 0.7); box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+}

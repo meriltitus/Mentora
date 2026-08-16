@@ -19,6 +19,7 @@
   * [Core Technical Features](#-core-technical-features)
   * [System Data Flow](#-system-data-flow)
   * [Mathematical Mastery Calculation](#-mathematical-mastery-calculation)
+  * [Tech Stack & Tooling](#-tech-stack--tooling)
   * [Installation & Local Setup](#-installation--local-setup)
 
 ---
@@ -133,6 +134,21 @@ Where $N$ is the total count of curriculum nodes, and $w_i$ represents the discr
 | `MASTERED` | `1.00` | Verified comprehension and successful explanation |
 
 *(In plain English: Your overall mastery score is the average of all these weights across your entire roadmap, converted to a percentage. You only reach 100% mastery when every single concept on your roadmap has been fully **Mastered**!)*
+
+---
+
+### 🛠️ Tech Stack & Tooling
+
+| Layer | Technology | Details |
+| :--- | :--- | :--- |
+| **Inference Engine** | **Groq Cloud API** | `llama-3.3-70b-versatile` (~450 tokens/sec) |
+| **Voice STT** | **Groq Whisper** | `whisper-large-v3-turbo` audio transcription |
+| **Voice TTS** | **Web Speech Synthesis** | High-quality regional voice synthesis |
+| **Audio Processing** | **Web Audio API** | Dynamic FFT Analyser & RMS amplitude tracking |
+| **Living Core** | **HTML5 Canvas 2D** | Harmonic wave equations with procedural particle field |
+| **Frontend Framework** | **Vanilla JS (ES6+)** | Zero external frontend bundle dependencies |
+| **Backend Runtime** | **Node.js Serverless** | Vercel Serverless Functions (`/api/*`) |
+| **Styling** | **Custom Vanilla CSS** | Glassmorphism, HSL color tokens, dark luxury palette |
 
 ---
 

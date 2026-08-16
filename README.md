@@ -36,7 +36,7 @@ Most educational AI tools act as **passive encyclopedias**—they generate overw
 ### 🚀 How to Use the App
 You don't need to know how to code to use Mentora! You can access it immediately:
 
-1. Open the **[Vercel Live App Link](YOUR_VERCEL_LIVE_LINK_HERE)** in any modern web browser (Google Chrome or Microsoft Edge are recommended for best voice features).
+1. Open the **[Vercel Live App Link](https://mentora-voice-tutor.vercel.app)** in any modern web browser (Google Chrome or Microsoft Edge are recommended for best voice features).
 2. Type in a topic you want to learn (e.g. *Neural Networks*, *Distributed Systems*, or *Macroeconomics*) and click `→`.
 3. The AI will outline a tailored **Learning Roadmap** on the right side of the screen.
 4. **Start Speaking**: Click the large microphone button at the bottom of the screen to talk directly to the AI, explain concepts in your own words, and answer its Socratic questions.

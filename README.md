@@ -11,7 +11,7 @@
 ---
 
 ## 📑 Table of Contents
-* [For Everyone (Non-Technical Guide)](#-for-everyone-non-technical-guide)
+* [Guide](#-for-everyone-non-technical-guide)
   * [What is Mentora?](#-what-is-mentora)
   * [How to Use the App](#-how-to-use-the-app)
   * [How the Socratic Learning Loop Works](#-how-the-socratic-learning-loop-works)
@@ -21,7 +21,7 @@
 
 ---
 
-## 🌍 For Everyone (Non-Technical Guide)
+## 🌍 Guide
 
 ### 💡 What is Mentora?
 Most educational AI tools act as **passive encyclopedias**—they generate overwhelming walls of text when asked a question, leaving the student in a passive reading state with zero verification of whether comprehension actually took place.

@@ -8,13 +8,6 @@
   <strong>An adaptive, voice-first AI tutor that diagnoses understanding, detects misconceptions, and verifies real learning through Socratic dialogue.</strong>
 </p>
 
-<p align="center">
-  <a href="YOUR_VERCEL_LIVE_LINK_HERE"><img src="https://img.shields.io/badge/Live%20App-Vercel-00e5ff?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
-  <img src="https://img.shields.io/badge/Node.js-%3E%3D18.0.0-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node Version" />
-  <img src="https://img.shields.io/badge/Groq-LLaMA%203.3%2070B-f97316?style=for-the-badge" alt="LLM Engine" />
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
-</p>
-
 ---
 
 ## 📑 Table of Contents
@@ -24,7 +17,6 @@
   * [How the Socratic Learning Loop Works](#-how-the-socratic-learning-loop-works)
 * [For Developers & Tech Teams](#-for-developers--tech-teams)
   * [Core Technical Features](#-core-technical-features)
-  * [Technical Architecture & Data Flow](#-technical-architecture--data-flow)
   * [Installation & Local Setup](#-installation--local-setup)
   * [Running the Automated Tests](#-running-the-automated-tests)
   * [Production Deployment (Vercel)](#-production-deployment-vercel)
@@ -85,52 +77,6 @@ flowchart TD
 * **Dynamic Knowledge Graph**: Interactive SVG Concept Tree rendering node statuses (`locked`, `in-progress`, `gap-detected`, `mastered`) synced with the backend model.
 * **Reactive Neural Core**: Interactive HTML5 Canvas 2D background core animating harmonic wave equations responsive to voice amplitude and system states.
 * **Session Persistence**: Full curriculum progress, turn histories, and mastery scores persist in `localStorage` across page reloads.
-
----
-
-### 📐 Technical Architecture & Data Flow
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User
-    participant Browser as Frontend (app.js / voice.js)
-    participant Server as Serverless API (/api/session/*)
-    participant LLM as Groq Engine (LLaMA 3.3 70B / Whisper)
-
-    User->>Browser: Speaks or types learning goal
-    Browser->>Server: POST /api/session/start { goal }
-    Server->>LLM: Single-Pass Curriculum Prompt
-    LLM-->>Server: JSON { concepts, first_question, topic }
-    Server-->>Browser: Session State, Concept Tree, Initial Speech
-    Browser->>User: Renders Roadmap & Speaks Diagnostic Question
-
-    User->>Browser: Speaks answer via Microphone
-    Browser->>Server: POST /api/session/transcribe { audio }
-    Server->>LLM: Groq Whisper Large v3 Turbo
-    LLM-->>Server: Transcript text
-    Server-->>Browser: { transcript }
-
-    Browser->>Server: POST /api/session/turn { session_id, transcript, session_state }
-    Server->>LLM: Unified Evaluator & Pedagogical Prompt
-    LLM-->>Server: JSON { evaluation, action, reply_text, mastery_updates }
-    Server-->>Browser: Updated Session State & Tutor Response
-    Browser->>User: Speaks response, pulses Living Core & updates Roadmap
-```
-
-#### Mathematical Mastery Map Calculation
-Cumulative comprehension is computed using a normalized, weighted concept formula:
-
-$$\text{Mastery Score } (%) = \left( \frac{\sum_{i=1}^{N} w_i}{N} \right) \times 100$$
-
-Where $N$ is the total count of curriculum nodes, and $w_i$ represents the discrete state weight of concept $i$:
-
-| Concept Status | State Weight ($w_i$) | Pedagogical Meaning |
-| :--- | :---: | :--- |
-| `NOT_STARTED` | `0.00` | Unvisited concept |
-| `IN_PROGRESS` | `0.35` | Concept currently under active evaluation |
-| `GAP_DETECTED` | `0.15` | Active misconception being remediated |
-| `MASTERED` | `1.00` | Verified comprehension and successful application |
 
 ---
 

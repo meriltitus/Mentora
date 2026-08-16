@@ -18,6 +18,7 @@
 * [For Developers & Tech Teams](#-for-developers--tech-teams)
   * [Core Technical Features](#-core-technical-features)
   * [System Data Flow](#-system-data-flow)
+  * [Mathematical Mastery Calculation](#-mathematical-mastery-calculation)
   * [Installation & Local Setup](#-installation--local-setup)
 
 ---
@@ -113,6 +114,24 @@ Here is a step-by-step breakdown of how the data travels across the system:
 1. **Initial Setup (Steps 1–6)**: The user submits their learning goal. The browser asks the server to start a session, which prompts LLaMA 3.3 to build the custom roadmap and generate the first question. This roadmap and question are returned to the browser, which renders the tree and speaks the question aloud.
 2. **Audio Processing (Steps 7–12)**: The user clicks the microphone and answers. The browser records their voice and sends it to the server, which transcribes it into text using Groq's high-speed Whisper model and returns the transcript.
 3. **Dialogue & Grading (Steps 13–16)**: The browser sends the text response back to the server. The AI evaluates the answer to check for understanding, decides whether the concept is mastered or needs Socratic remediation (via analogies/hints), updates your score, and generates the tutor's reply. The browser then speaks the response and updates the visual roadmap.
+
+---
+
+### 📊 Mathematical Mastery Calculation
+
+Mentora computes your overall understanding percentage dynamically. Instead of a simple pass/fail grade, it assigns different numerical weights to each topic on your roadmap based on your current level of comprehension:
+
+| Concept Status | State Weight ($w_i$) | Pedagogical Meaning |
+| :--- | :---: | :--- |
+| `NOT_STARTED` | `0.00` | Unvisited concept |
+| `IN_PROGRESS` | `0.35` | Concept currently under active evaluation |
+| `GAP_DETECTED` | `0.15` | Active misconception being Socraticly remediated |
+| `MASTERED` | `1.00` | Verified comprehension and successful explanation |
+
+#### The Formula:
+$$\text{Mastery Score } (%) = \left( \frac{\sum_{i=1}^{N} w_i}{N} \right) \times 100$$
+
+*(In plain English: Your overall mastery score is the average of all these weights across your entire roadmap, converted to a percentage. You only reach 100% mastery when every single concept on your roadmap has been fully **Mastered**!)*
 
 ---
 

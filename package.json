@@ -1,0 +1,20 @@
+{
+  "name": "mentora",
+  "version": "1.0.0",
+  "description": "Mentora — Voice-First Adaptive AI Learning Tutor",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "dev:vercel": "vercel dev",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0"
+  },
+  "devDependencies": {
+    "vercel": "^59.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

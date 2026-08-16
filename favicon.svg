@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="mentoraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Clean dark backdrop -->
+  <rect width="32" height="32" rx="7" fill="#080c16" />
+
+  <!-- Razor-sharp minimal geometric M monogram with voice waveform geometry -->
+  <path d="M 7.5 22.5 V 10.5 L 13 18.5 L 16 14.5 L 19 18.5 L 24.5 10.5 V 22.5" 
+        fill="none" 
+        stroke="url(#mentoraGrad)" 
+        stroke-width="2.4" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+</svg>

@@ -102,10 +102,11 @@ async function generateGroq({ systemPrompt, userPrompt, temperature, maxTokens =
   if (!apiKey) throw new Error('GROQ_API_KEY environment variable is not set');
 
   const modelsToTry = [
-    process.env.GROQ_MODEL || 'qwen/qwen3.6-27b',
-    'qwen/qwen3.6-27b',
-    'llama-3.3-70b-versatile',
-    'mixtral-8x7b-32768'
+    process.env.GROQ_MODEL || 'groq/compound-mini',
+    'groq/compound-mini',
+    'groq/compound',
+    'openai/gpt-oss-120b',
+    'qwen/qwen3.6-27b'
   ];
   const uniqueModels = [...new Set(modelsToTry)];
 
@@ -120,7 +121,7 @@ async function generateGroq({ systemPrompt, userPrompt, temperature, maxTokens =
           { role: 'user', content: userPrompt }
         ],
         temperature,
-        max_tokens: Math.max(maxTokens, 4096),
+        max_tokens: Math.min(maxTokens, 2048),
       };
 
       // Qwen models output reasoning thoughts which fail Groq's strict JSON validation at start of generation.

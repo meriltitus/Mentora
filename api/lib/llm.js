@@ -120,7 +120,7 @@ async function generateGroq({ systemPrompt, userPrompt, temperature, maxTokens =
           { role: 'user', content: userPrompt }
         ],
         temperature,
-        max_tokens: Math.min(maxTokens, 1000),
+        max_tokens: Math.max(maxTokens, 4096),
       };
 
       // Qwen models output reasoning thoughts which fail Groq's strict JSON validation at start of generation.
@@ -231,6 +231,11 @@ function parseJSONResponse(raw) {
   }
 
   let cleaned = raw.trim();
+
+  // Strip reasoning thoughts (e.g. <think>...</think>) from reasoning models like Qwen / DeepSeek
+  if (cleaned.includes('<think>')) {
+    cleaned = cleaned.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+  }
 
   // Strip markdown code fences if present
   if (cleaned.includes('```')) {

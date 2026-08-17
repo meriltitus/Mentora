@@ -102,8 +102,8 @@ async function generateGroq({ systemPrompt, userPrompt, temperature, maxTokens =
   if (!apiKey) throw new Error('GROQ_API_KEY environment variable is not set');
 
   const modelsToTry = [
-    process.env.GROQ_MODEL || 'llama-3.1-8b-instant',
-    'llama-3.1-8b-instant',
+    process.env.GROQ_MODEL || 'qwen/qwen3.6-27b',
+    'qwen/qwen3.6-27b',
     'llama-3.3-70b-versatile',
     'mixtral-8x7b-32768'
   ];
@@ -123,7 +123,9 @@ async function generateGroq({ systemPrompt, userPrompt, temperature, maxTokens =
         max_tokens: Math.min(maxTokens, 1000),
       };
 
-      if (jsonMode) {
+      // Qwen models output reasoning thoughts which fail Groq's strict JSON validation at start of generation.
+      // We bypass JSON mode for Qwen; our robust parseJSONResponse will extract the JSON object from the text.
+      if (jsonMode && !model.includes('qwen')) {
         body.response_format = { type: 'json_object' };
       }
 
